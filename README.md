@@ -3,7 +3,7 @@
 The site can be found at the following addresses 🌐:
 
 - Main: <https://hi-learning-course.web.app>
-- Server: <https://zeroneacademy-server.onrender.com>
+- Server: <https://learningcourse-server.onrender.com>
 
 ## Pre-requisites
 

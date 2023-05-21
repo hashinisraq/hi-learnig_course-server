@@ -286,6 +286,47 @@ async function run() {
         });
 
 
+        // Nodemailer API
+        app.post('/send-email', (req, res) => {
+            const { data } = req.body;
+
+            // Create a Nodemailer transporter
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.EM_ADD,
+                    pass: process.env.EM_PASS,
+                },
+            });
+
+            let mailOptions = {};
+
+            if (data.status === "confirmed") {
+                mailOptions = {
+                    from: process.env.EM_ADD,
+                    to: data.email,
+                    subject: 'Confirmation',
+                    text: 'This is a confirmation email that your payment is complete and you have successfully enrolled in your course. Enjoy the lessons. Thank you.',
+                };
+            } else if (data.status === "cancelled") {
+                mailOptions = {
+                    from: process.env.EM_ADD,
+                    to: data.email,
+                    subject: 'Confirmation',
+                    text: 'This is a confirmation email that your payment is not completed successfully. There is something mismatch in your order. Please contact us as soon as possible to solve the issue. Thank you.',
+                };
+            }
+
+            // Send the email
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    res.status(500).send('Error sending email');
+                } else {
+                    res.send('Email sent successfully');
+                }
+            });
+        });
+
     }
 
     finally {
