@@ -338,7 +338,7 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) => {
-    res.send('0ne academy server is running')
+    res.send('HI-Learning Course server is running')
 })
 
 app.listen(port, () => {
