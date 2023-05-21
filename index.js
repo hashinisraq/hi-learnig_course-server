@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const nodemailer = require('nodemailer');
 const cors = require('cors');
 require('dotenv').config();
 const { MongoClient } = require('mongodb');
