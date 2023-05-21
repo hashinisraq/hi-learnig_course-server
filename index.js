@@ -237,31 +237,32 @@ async function run() {
 
 
         // Nodemailer API
-        app.post('/send-email', (req, res) => {
+        app.post('/send-email', async (req, res) => {
             const { data } = req.body;
 
             // Create a Nodemailer transporter
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: process.env.EM_ADD,
-                    pass: process.env.EM_PASS,
+                    user: `${process.env.email}`,
+                    pass: `${process.env.password}`,
                 },
             });
 
+            // Define the email options
             let mailOptions = {};
 
             if (data.status === "confirmed") {
                 mailOptions = {
-                    from: process.env.EM_ADD,
-                    to: data.email,
+                    from: `${process.env.email}`,
+                    to: data.order_email,
                     subject: 'Confirmation',
                     text: 'This is a confirmation email that your payment is complete and you have successfully enrolled in your course. Enjoy the lessons. Thank you.',
                 };
             } else if (data.status === "cancelled") {
                 mailOptions = {
-                    from: process.env.EM_ADD,
-                    to: data.email,
+                    from: `${process.env.email}`,
+                    to: data.order_email,
                     subject: 'Confirmation',
                     text: 'This is a confirmation email that your payment is not completed successfully. There is something mismatch in your order. Please contact us as soon as possible to solve the issue. Thank you.',
                 };
@@ -272,7 +273,7 @@ async function run() {
                 if (error) {
                     res.status(500).send('Error sending email');
                 } else {
-                    res.send('Email sent successfully');
+                    res.status(200).send('Email sent successfully');
                 }
             });
         });
