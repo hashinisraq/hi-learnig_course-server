@@ -29,10 +29,7 @@ async function run() {
         const recursionInPythonCollection = database.collection('recursion_in_python');
         const graphInPythonCollection = database.collection('graph_in_python');
         const queueInPythonCollection = database.collection('queue_in_python');
-        const programmingLanguageICollection = database.collection('programming_language_I');
-        const programmingLanguageIICollection = database.collection('programming_language_II');
-        const dataStructureCollection = database.collection('data_structure');
-        const mathematicsICollection = database.collection('mathematics_I');
+        const mernStackWebDevelopmentICollection = database.collection('mern_stack_web_development');
 
         // Add Users API
         app.post('/users', async (req, res) => {
@@ -114,66 +111,19 @@ async function run() {
         })
 
 
-        // Get PROGRAMMING LANGUAGE I Contents API
-        app.get('/programming_language_I', async (req, res) => {
-            const cursor = programmingLanguageICollection.find({});
+
+        // Get MSWD I Contents API
+        app.get('/mern_stack_web_development', async (req, res) => {
+            const cursor = mernStackWebDevelopmentICollection.find({});
             const contents = await cursor.toArray();
             res.send(contents);
         });
 
 
-        // Add PROGRAMMING LANGUAGE I Contents API
-        app.post('/programming_language_I', async (req, res) => {
+        // Add MSWD I Contents API
+        app.post('/mern_stack_web_development', async (req, res) => {
             const contents = req.body;
-            const result = await programmingLanguageICollection.insertOne(contents);
-            res.json(result);
-        })
-
-
-        // Get PROGRAMMING LANGUAGE II Contents API
-        app.get('/programming_language_II', async (req, res) => {
-            const cursor = programmingLanguageIICollection.find({});
-            const contents = await cursor.toArray();
-            res.send(contents);
-        });
-
-
-        // Add PROGRAMMING LANGUAGE II Contents API
-        app.post('/programming_language_II', async (req, res) => {
-            const contents = req.body;
-            const result = await programmingLanguageIICollection.insertOne(contents);
-            res.json(result);
-        })
-
-
-        // Get DATA STRUCTURES Contents API
-        app.get('/data_structure', async (req, res) => {
-            const cursor = dataStructureIICollection.find({});
-            const contents = await cursor.toArray();
-            res.send(contents);
-        });
-
-
-        // Add DATA STRUCTURES Contents API
-        app.post('/data_structure', async (req, res) => {
-            const contents = req.body;
-            const result = await dataStructureCollection.insertOne(contents);
-            res.json(result);
-        })
-
-
-        // Get MATHEMATICS I Contents API
-        app.get('/mathematics_I', async (req, res) => {
-            const cursor = mathematicsICollection.find({});
-            const contents = await cursor.toArray();
-            res.send(contents);
-        });
-
-
-        // Add MATHEMATICS I Contents API
-        app.post('/mathematics_I', async (req, res) => {
-            const contents = req.body;
-            const result = await mathematicsICollection.insertOne(contents);
+            const result = await mernStackWebDevelopmentICollection.insertOne(contents);
             res.json(result);
         })
 
